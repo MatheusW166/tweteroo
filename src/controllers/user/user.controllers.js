@@ -13,7 +13,7 @@ function postTweet(req, res) {
     res.status(401).send("UNAUTHORIZED");
     return;
   }
-  if (username && tweet) {
+  if (username && tweet && typeof tweet === "string") {
     db.createTweet({ username, tweet });
     res.status(201).send("OK");
     return;
@@ -23,12 +23,16 @@ function postTweet(req, res) {
 
 function signUp(req, res) {
   const { username, avatar } = req.body;
-  if (username && avatar) {
-    db.createUser({ username, avatar });
-    res.status(201).send("OK");
+  if (!username || !avatar) {
+    res.status(400).send("Todos os campos são obrigatórios!");
     return;
   }
-  res.status(400).send("Todos os campos são obrigatórios!");
+  if (typeof username !== "string" || typeof avatar !== "string") {
+    res.status(400).send("Apenas strings são aceitas");
+    return;
+  }
+  db.createUser({ username, avatar });
+  res.status(201).send("OK");
 }
 
 const userControllers = {
