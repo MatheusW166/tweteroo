@@ -5,13 +5,7 @@ const router = Router();
 
 router.get("/tweets", tweetsControllers.getTweets);
 router.get("/tweets/:username", userControllers.getTweetsUser);
-
-router.post("/sign-up", (req, res) => {
-  res.send(`ROTA POST SIGNUP ${JSON.stringify(req.body)}`);
-});
-// Username pelo header
-router.post("/tweets", (req, res) => {
-  res.send(`ROTA POST TWEETS: ${JSON.stringify(req.headers.user)}`);
-});
+router.post("/sign-up", userControllers.signUp);
+router.post("/tweets", userControllers.postTweet);
 
 export default router;

@@ -22,9 +22,24 @@ function getTweetsUser(username) {
     }));
 }
 
+function createUser(user) {
+  if (!getUser(user.username)) {
+    users.push(user);
+  }
+  return user;
+}
+
+function createTweet(tweet) {
+  tweets.push(tweet);
+  return tweet;
+}
+
 const db = {
   getTweets,
   getTweetsUser,
+  createUser,
+  createTweet,
+  getUser,
 };
 
 export default db;
