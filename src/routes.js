@@ -1,13 +1,11 @@
 import { Router } from "express";
-import { tweetsControllers } from "./controllers/index.js";
+import { tweetsControllers, userControllers } from "./controllers/index.js";
 
 const router = Router();
 
 router.get("/tweets", tweetsControllers.getTweets);
+router.get("/tweets/:username", userControllers.getTweetsUser);
 
-router.get("/tweets/:username", (req, res) => {
-  res.send(`ROTA GET TWEETS/${JSON.stringify(req.params)}`);
-});
 router.post("/sign-up", (req, res) => {
   res.send(`ROTA POST SIGNUP ${JSON.stringify(req.body)}`);
 });
