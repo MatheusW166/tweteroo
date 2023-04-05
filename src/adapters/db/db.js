@@ -1,7 +1,7 @@
 import { tweets, users } from "./data.js";
 
 function getUser(username) {
-  return users.filter((user) => user.username === username).at(0);
+  return users.find((user) => user.username === username);
 }
 
 function getTweets(page = 1) {
