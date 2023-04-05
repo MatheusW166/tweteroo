@@ -6,7 +6,15 @@ function getUser(username) {
 
 function getTweets(page = 1) {
   const start = (page - 1) * 10;
-  return tweets.slice(start, start + 10);
+  const lastTweets = tweets
+    .slice(start, start + 10)
+    .map(({ username, tweet }) => ({
+      username,
+      tweet,
+      avatar: getUser(username)?.avatar,
+    }))
+    .filter(({ avatar }) => avatar !== undefined);
+  return lastTweets;
 }
 
 function getTweetsUser(username) {
